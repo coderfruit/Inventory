@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="echarts.min.js"></script>
+    
+    
+   
+    
+</head>
+
+<body>
+
+	<h2>Index</h2>
+<input type="button" name="name" value="导出" id="export" />
+<div id="main" style="height:400px"></div>
+
+<br />
+<br />
+
+<div id="main2" style="height:600px"></div>
+<table></table>
+
+<script type="text/javascript">
+var option = {
+    tooltip: {
+        show: true
+    },
+    legend: {
+        data: ['销量']
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+    series: [
+        {
+            "name": "销量",
+            "type": "bar",
+            "data": [5, 20, 40, 10, 10, 20]
+        }
+    ]
+};
+
+var myChart = echarts.init(document.getElementById('main'));
+// 为echarts对象加载数据 
+myChart.setOption(option);
+
+//导出
+$('#export').on('click', function () {
+    var chartExportUrl = 'http://localhost:9090/lampinfo/create/deviceStatusReport';
+    var picBase64Info = myChart.getDataURL();//获取echarts图的base64编码，为png格式。
+    $.ajax({
+    	url : chartExportUrl ,
+    	type : "POST" ,
+    	dataType:"JSON",
+    	contentType: 'application/json;charset=UTF-8',
+    	data :JSON.stringify({
+    		"pageNo":1,
+    		"pageSize":10,
+    		"startDate":"2017-01-01",
+    		"endDate":"2018-01-17",
+    		"type":"1",
+    		"name":"sd",
+    		"exportType":"pdf",
+    		"base64Info":picBase64Info
+    		}) ,
+    		
+    	/* data : {"base64Info":picBase64Info}, */
+    	success : function(response){
+       	 var $eleForm = $("<form method='POST'><input type='hidden' name='csvFileName' value='sd.csv'></form>");
+         $eleForm.attr("action","http://localhost:9090/lampinfo/deviceStatusReport/exportPDF");
+            $("table").append($eleForm);
+
+            //提交表单，实现下载
+            $eleForm.submit();  
+    	},
+    	error : function(response){
+    		alert(response.message);
+    	}
+    })
+});
+</script>
+
+
+</body>
+</html>

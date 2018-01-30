@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stee.inventory.dao.TestMybatis">
+	<select id="findAll" resultMap="testResultMap">
+		SELECT test0_.id, test0_.gzone_id, test0_.lamp_id
+           FROM stl_gzm_gzoneandlamprelation test0_
+	</select>
+	<resultMap id="testResultMap" type="com.stee.inventory.entity.Test">
+		<id property="id" column="id"/>
+		<result property="gzoneid" column="gzone_id"></result>
+		<result property="lampid" column="lamp_id"></result>
+	</resultMap>
+	<insert id="inserts" parameterType="com.stee.inventory.entity.Test">
+		INSERT INTO stl_gzm_gzoneandlamprelation(id,gzone_id,lamp_id)
+		VALUES (#{id},#{gzoneid},#{lampid})
+	</insert>
+</mapper>
