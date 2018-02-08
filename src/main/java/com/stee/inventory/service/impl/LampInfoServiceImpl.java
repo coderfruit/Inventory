@@ -598,12 +598,12 @@ public class LampInfoServiceImpl implements ILampInfoService {
 					// 查询数据，用于创建CSV文件
 					try {
 						lehList = findLuminaireStatusReport(obj);
-						dataList.add(obj.getName());
-						dataList.add("Date Type:"+","+obj.getName());
-						dataList.add("Start Date:"+","+obj.getStartDate());
-						dataList.add("End Date:"+","+obj.getEndDate());
+						dataList.add(","+obj.getName());
+						dataList.add(","+",Date Type:"+","+obj.getName());
+						dataList.add(","+",Start Date:"+","+obj.getStartDate());
+						dataList.add(","+",End Date:"+","+obj.getEndDate());
 						// 根据不同的criteria加不同的列名
-						dataList.add("Export Time:"+","+df.format(new Date()));
+						dataList.add(","+",Export Time:"+","+df.format(new Date()));
 						dataList.add(",,,");
 						dataList.add("Date,"+obj.getName()+"("+getUnits(obj.getType())+")");
 						for (LiminaireEnergyHist e : lehList) {
@@ -631,12 +631,12 @@ public class LampInfoServiceImpl implements ILampInfoService {
 					// 查询数据，用于创建CSV文件
 					try {
 						dsrList = findDeviceStatusReport(obj);
-						dataList.add(obj.getName());
-						dataList.add("Date Type:"+","+obj.getName());
-						dataList.add("Start Date:"+","+obj.getStartDate());
-						dataList.add("End Date:"+","+obj.getEndDate());
+						dataList.add(","+obj.getName());
+						dataList.add(","+",Date Type:"+","+obj.getName());
+						dataList.add(","+",Start Date:"+","+obj.getStartDate());
+						dataList.add(","+",End Date:"+","+obj.getEndDate());
 						// 根据不同的criteria加不同的列名
-						dataList.add("Export Time:"+","+df.format(new Date()));
+						dataList.add(","+",Export Time:"+","+df.format(new Date()));
 						dataList.add(",,,");
 						dataList.add("Date,"+obj.getName()+"("+getUnits(obj.getType())+")");
 						for (DeviceStatusReport e : dsrList) {
