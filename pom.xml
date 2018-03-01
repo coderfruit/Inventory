@@ -28,7 +28,7 @@
 		<repository>
 			<id>Third Party</id>
 			<name>Nexus 3rd Party</name>
-			<url>http://steecd.imwork.net:9999/nexus/content/repositories/streetlightRepos</url>
+			<url>http://192.168.0.92:9999/nexus/content/repositories/streetlightRepos</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
