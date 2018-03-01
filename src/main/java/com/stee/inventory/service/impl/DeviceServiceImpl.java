@@ -1,39 +1,50 @@
 package com.stee.inventory.service.impl;
 
-import com.lowagie.text.DocumentException;
-import com.stee.inventory.Exception.ServiceException;
-import com.stee.inventory.dao.*;
-import com.stee.inventory.dto.Result;
-import com.stee.inventory.entity.*;
-import com.stee.inventory.entity.sel.*;
-import com.stee.inventory.service.IDeviceService;
-import com.stee.inventory.utils.Utils;
-import com.stee.sel.asm.LuminaireModelConfig;
-import com.stee.sel.common.ResultData;
-import com.stee.sel.constant.ResponseCode;
-import com.stee.sel.field.ResultFieldConfig;
-import com.stee.sel.lim.LampInfo;
-import com.stee.sel.lim.reading.DeviceStatusReport;
-import com.stee.sel.lim.reading.LiminaireEnergyHist;
-import org.apache.ibatis.ognl.DynamicSubscript;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
-import static org.apache.ibatis.ognl.DynamicSubscript.all;
-import static sun.audio.AudioDevice.device;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import com.lowagie.text.DocumentException;
+import com.stee.inventory.dao.DeviceDao;
+import com.stee.inventory.dao.DeviceDataStatusRepository;
+import com.stee.inventory.dao.DeviceModelDao;
+import com.stee.inventory.dao.GeoZoneRepository;
+import com.stee.inventory.dao.LampPoleDao;
+import com.stee.inventory.dto.Result;
+import com.stee.inventory.entity.DeviceControl;
+import com.stee.inventory.entity.DeviceInfo;
+import com.stee.inventory.entity.DeviceLocationInfo;
+import com.stee.inventory.entity.RequestObject;
+import com.stee.inventory.entity.sel.DeviceDataStatsEntity;
+import com.stee.inventory.entity.sel.DeviceInfoEntity;
+import com.stee.inventory.entity.sel.DeviceModelEntity;
+import com.stee.inventory.entity.sel.GeoZoneEntity;
+import com.stee.inventory.entity.sel.LampInfoDetail;
+import com.stee.inventory.entity.sel.LampPoleEntity;
+import com.stee.inventory.service.IDeviceService;
+import com.stee.inventory.utils.Utils;
+import com.stee.sel.common.ResultData;
+import com.stee.sel.constant.ResponseCode;
+import com.stee.sel.field.ResultFieldConfig;
 
 @Service
 public class DeviceServiceImpl implements IDeviceService{

@@ -1,6 +1,21 @@
 package com.stee.inventory.controller;
 
-import com.stee.inventory.dto.*;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.stee.inventory.dto.Result;
 import com.stee.inventory.entity.DeviceInfo;
 import com.stee.inventory.entity.DeviceLocationInfo;
 import com.stee.inventory.entity.RequestObject;
@@ -14,22 +29,7 @@ import com.stee.inventory.service.IDimmingGroupService;
 import com.stee.inventory.service.IGeoZoneService;
 //import com.stee.inventory.service.ILampInfoService;
 import com.stee.inventory.utils.Utils;
-import com.stee.sel.asm.LuminaireModelConfig;
 import com.stee.sel.common.ResultData;
-import com.stee.sel.gzm.GZone;
-import com.stee.sel.lim.LampInfo;
-import com.stee.sel.lim.configruation.Location;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /* Copyright (C) 2016, ST Electronics Info-Comm Systems PTE. LTD
  * All rights reserved.

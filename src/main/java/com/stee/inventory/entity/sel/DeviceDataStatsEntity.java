@@ -1,7 +1,5 @@
 package com.stee.inventory.entity.sel;
 
-import com.stee.sel.lim.reading.CommonUtils;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -13,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.stee.sel.report.CommonUtils;
 /**
  * 
  * @pSTL_SEL

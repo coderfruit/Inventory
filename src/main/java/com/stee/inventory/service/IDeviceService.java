@@ -1,18 +1,18 @@
 package com.stee.inventory.service;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.data.domain.Page;
+
 import com.stee.inventory.dto.Result;
-import com.stee.inventory.entity.*;
+import com.stee.inventory.entity.DeviceInfo;
+import com.stee.inventory.entity.DeviceLocationInfo;
+import com.stee.inventory.entity.RequestObject;
 import com.stee.inventory.entity.sel.DeviceInfoEntity;
 import com.stee.inventory.entity.sel.DeviceModelEntity;
 import com.stee.inventory.entity.sel.LampInfoDetail;
-import com.stee.sel.asm.LuminaireModelConfig;
 import com.stee.sel.common.ResultData;
-import com.stee.sel.lim.LampInfo;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
-import java.util.Map;
 
 public interface IDeviceService {
 //    Result<DeviceInfoEntity> update(DeviceInfoEntity info);

@@ -20,15 +20,15 @@
  */
 package com.stee.inventory.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.google.common.collect.Lists;
 import com.stee.inventory.dao.GeoZoneRepository;
 import com.stee.inventory.entity.sel.GeoZoneEntity;
 import com.stee.inventory.service.IGeoZoneService;
-import com.stee.sel.gzm.GZone;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by SerryMiano on 2017/1/10.
