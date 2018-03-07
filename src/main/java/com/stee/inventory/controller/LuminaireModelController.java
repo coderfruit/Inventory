@@ -40,7 +40,7 @@ public class LuminaireModelController {
 
 	/**
 	 * 获取所有LuminaireModel的配置信息. *待分页
-	 * 
+	 *
 	 * @return
 	 * @author Jerry
 	 */
@@ -51,15 +51,19 @@ public class LuminaireModelController {
 
 	/**
 	 * 新增或修改相应的LuminaireModel 的配置.
-	 * 
-	 * @param config
+	 *
+	 //	 * @param config
 	 * @return
 	 * @author Jerry
 	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Map<String, String> save(@RequestBody DeviceModelEntity config) {
 		Map<String, String> map = new HashMap<>();
+		System.out.println("-----------"+config.getPicture()+"-----------");
+//		byte[] bytes = config.getPictureInfo().getBytes();
+//		config.setPicture(bytes);
 		map.put("status", luminaireService.save(config));
+//		System.out.println(config.getPictureInfo());
 		return map;
 	}
 
@@ -72,7 +76,7 @@ public class LuminaireModelController {
 
 	/**
 	 * 判断ModelId 是否已经存在.
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 * @author Jerry
@@ -84,7 +88,7 @@ public class LuminaireModelController {
 
 	/**
 	 * 删除指定的配置项
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 * @author Jerry
@@ -96,12 +100,12 @@ public class LuminaireModelController {
 		return map;
 	}
 
-    /**
-     * Luminaire 模糊查询
-     *
-     * @param query
-     * @return
-     */
+	/**
+	 * Luminaire 模糊查询
+	 *
+	 * @param query
+	 * @return
+	 */
 	@RequestMapping(value = "/query/modelId/like", method = RequestMethod.POST)
 	public ResultData<DeviceModelEntity> findByModelIdLike(@RequestBody(required = false) LuminaireQueryBean query) {
 		return luminaireService.findByModelIdLike(query);

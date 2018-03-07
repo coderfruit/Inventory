@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import javax.jws.WebParam;
 
 @RestController
-@RequestMapping("/co2")
+//@RequestMapping("/co2")
 public class Co2EmissionFactorController {
     @Resource
     private ICo2EmissionFactorService iSvcCarboDioxide;
@@ -62,8 +62,9 @@ public class Co2EmissionFactorController {
 
 //    @Log(moduleName="update",desc="修改二氧化碳设置信息")
     @ResponseBody
-    @RequestMapping(path="/co2/update",method=RequestMethod.PUT)
+    @RequestMapping(path="/co2/update",method=RequestMethod.POST)
     public ResultData update(@RequestBody Co2EmissionFactor carboDioxide){
+        System.out.println("----------------------");
         return iSvcCarboDioxide.update(carboDioxide);
     }
 

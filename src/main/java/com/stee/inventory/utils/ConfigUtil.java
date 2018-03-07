@@ -1,7 +1,10 @@
 package com.stee.inventory.utils;
 
 import com.stee.sel.common.ResultData;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +31,7 @@ import java.util.List;
  *
  */
 
+@Component
 public class ConfigUtil {
 	
 	public static final String SUCCESS = "000000";
@@ -35,10 +39,17 @@ public class ConfigUtil {
 	public static final String FAILED = "999999";   //处理失败
 	
 	public static final String ENCODING_NAME="UTF-8";
-	
-	public static final String ATM_SAVELOG_ADDRESS = PropUtils.getContextProperty("ATM_SAVELOG_ADDRESS").toString();
-	
-	public static String getNowTimeString(){
+
+
+	public static String ATM_SAVELOG_ADDRESS;
+//	public static final String ATM_SAVELOG_ADDRESS = PropUtils.getContextProperty("ATM_SAVELOG_ADDRESS").toString();
+
+    @Value("${ATM_SAVELOG_ADDRESS}")
+    public void setAtmSavelogAddress(String atmSavelogAddress) {
+        ATM_SAVELOG_ADDRESS = atmSavelogAddress;
+    }
+
+    public static String getNowTimeString(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date());
 	}
@@ -70,5 +81,9 @@ public class ConfigUtil {
 		result.setData(list);
 		return result;
 	}
-	
+
+//	@PostConstruct
+    public void run(){
+        System.out.println("-----------"+ATM_SAVELOG_ADDRESS+"------------------");
+    }
 }

@@ -14,7 +14,7 @@ public class LampPoleModel{
     private String lampPoleModelId;
     private String description;
     private Double height;
-    private byte[] picture;
+    private String picture;
     private Integer tenantId;
 
     private List<LampPole> lampPoles;
@@ -51,11 +51,11 @@ public class LampPoleModel{
 
     @Basic
     @Column(name = "picture")
-    public byte[] getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(byte[] picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 
@@ -79,7 +79,7 @@ public class LampPoleModel{
         this.lampPoles = lampPoles;
     }
 
-    public LampPoleModel(String lampPoleModelId, String description, Double height, byte[] picture, Integer tenantId) {
+    public LampPoleModel(String lampPoleModelId, String description, Double height, String picture, Integer tenantId) {
         this.lampPoleModelId = lampPoleModelId;
         this.description = description;
         this.height = height;
@@ -96,7 +96,7 @@ public class LampPoleModel{
                 "lampPoleModelId='" + lampPoleModelId + '\'' +
                 ", description='" + description + '\'' +
                 ", height=" + height +
-                ", picture=" + Arrays.toString(picture) +
+                ", picture=" + picture +
                 ", tenantId=" + tenantId +
                 ", lampPoles=" + lampPoles +
                 '}';

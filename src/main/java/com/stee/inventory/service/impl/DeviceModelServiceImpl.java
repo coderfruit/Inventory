@@ -1,24 +1,27 @@
 package com.stee.inventory.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.collect.Lists;
+import com.stee.inventory.Exception.ServiceException;
+import com.stee.inventory.dao.DeviceModelDao;
+import com.stee.inventory.entity.DeviceModel;
+import com.stee.inventory.entity.LuminaireQueryBean;
+import com.stee.inventory.entity.Result;
+import com.stee.inventory.entity.sel.DeviceModelEntity;
+import com.stee.inventory.service.IDeviceModelService;
+import com.stee.sel.common.ResultData;
+import com.stee.sel.constant.ResponseCode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
-
-import com.google.common.collect.Lists;
-import com.stee.inventory.dao.DeviceModelDao;
-import com.stee.inventory.entity.LuminaireQueryBean;
-import com.stee.inventory.entity.sel.DeviceModelEntity;
-import com.stee.inventory.service.IDeviceModelService;
-import com.stee.sel.common.ResultData;
-import com.stee.sel.constant.ResponseCode;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DeviceModelServiceImpl implements IDeviceModelService{
@@ -105,12 +108,12 @@ public class DeviceModelServiceImpl implements IDeviceModelService{
 //            }
 //        }
 
-        resultData.setData(list);
+        resultData.setData(configs);
         resultData.setStatus(ResponseCode.SUCCESS.getCode());
         return resultData;
     }
 
-//    @Override
+    //    @Override
 //    public Result<Page<DeviceModel>> getAll(Pageable pageable) {
 //        try{
 //            Page<DeviceModel> pageResult=deviceModelDao.findAll(pageable);

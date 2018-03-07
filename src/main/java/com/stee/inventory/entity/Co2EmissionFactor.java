@@ -15,6 +15,7 @@ public class Co2EmissionFactor implements Serializable{
 
     @Id
     @Column(name = "co2_emission_factor_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getCo2EmissionFactorId() {
         return co2EmissionFactorId;
     }
