@@ -17,29 +17,21 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.stee.inventory.dao.*;
+import com.stee.inventory.entity.sel.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.lowagie.text.DocumentException;
-import com.stee.inventory.dao.DeviceDao;
-import com.stee.inventory.dao.DeviceDataStatusRepository;
-import com.stee.inventory.dao.DeviceModelDao;
-import com.stee.inventory.dao.GeoZoneRepository;
-import com.stee.inventory.dao.LampPoleDao;
 import com.stee.inventory.dto.Result;
 import com.stee.inventory.entity.DeviceControl;
 import com.stee.inventory.entity.DeviceInfo;
 import com.stee.inventory.entity.DeviceLocationInfo;
 import com.stee.inventory.entity.RequestObject;
-import com.stee.inventory.entity.sel.DeviceDataStatsEntity;
-import com.stee.inventory.entity.sel.DeviceInfoEntity;
-import com.stee.inventory.entity.sel.DeviceModelEntity;
-import com.stee.inventory.entity.sel.GeoZoneEntity;
-import com.stee.inventory.entity.sel.LampInfoDetail;
-import com.stee.inventory.entity.sel.LampPoleEntity;
 import com.stee.inventory.service.IDeviceService;
 import com.stee.inventory.utils.Utils;
 import com.stee.sel.common.ResultData;
@@ -59,6 +51,10 @@ public class DeviceServiceImpl implements IDeviceService{
     private GeoZoneRepository geoZoneRepository;
     @Resource
     private DeviceDataStatusRepository deviceStatusRepository;
+    @Resource
+    private LampPoleModelDao lampPoleModelDao;
+    @Resource
+    private DeviceAlarmsRepository deviceAlarmsRepository;
 
 
     @Override
@@ -176,9 +172,14 @@ public class DeviceServiceImpl implements IDeviceService{
     @Override
     public Page<DeviceInfoEntity> getAllByFilter(Integer pageNo, Integer pageSize, String type, String name) {
         Page<DeviceInfoEntity> page = null;
-        Pageable pageable= new PageRequest(pageNo-1, pageSize);
+         Pageable pageable= new PageRequest(pageNo-1, pageSize);
         try {
             page = repository.findAll(where(type,name), pageable);
+            //TODO
+            page.getContent().forEach(deviceInfoEntity -> {
+                LampPoleEntity lampPole = lampPoleDao.findByLampPoleId(deviceInfoEntity.getLampPoleId());
+                deviceInfoEntity.setLampPoleModelId(lampPole.getLampPoleModelId());
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -204,7 +205,11 @@ public class DeviceServiceImpl implements IDeviceService{
     public Result findPoleOrLuminaire(RequestObject obj) {
         Result result = new Result();
         try {
-            DeviceInfoEntity lampInfo = repository.findOne(obj.getLampId());
+            System.out.println(obj);
+
+            DeviceInfoEntity lampInfo = repository.findByDeviceId(obj.getLampId());
+            LampPoleEntity lampPole = lampPoleDao.findByLampPoleId(lampInfo.getLampPoleId());
+            lampInfo.setLampPoleModelId(lampPole.getLampPoleModelId());
             DeviceModelEntity modelConfig = null;
             if(lampInfo.getDeviceModelId()!=null){
                 modelConfig = deviceModelDao.findByDeviceModelId(lampInfo.getDeviceModelId());
@@ -212,9 +217,9 @@ public class DeviceServiceImpl implements IDeviceService{
 //			PoleModelConfig poleModelConfig = poleRepository.findByName(lampInfo.getLampPole().getModelId());
             GeoZoneEntity gzone = null;
             if(lampInfo.getGeozoneId()!=null){
-                gzone = geoZoneRepository.findByName(lampInfo.getGeozoneId());
+                gzone = geoZoneRepository.findByGeozoneId(lampInfo.getGeozoneId());
             }
-//            List<LiminaireAlarmInfo> pageAlarm = getLimAlarmInfo(obj);
+            List<DeviceAlarmsEntity> pageAlarm = getLimAlarmInfo(obj);
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
             Date date = lampInfo.getInstallationDate();
             String installedDate = null;
@@ -235,11 +240,13 @@ public class DeviceServiceImpl implements IDeviceService{
             deviceLocationInfo.setDeviceLocationInfo(lampInfo.getGeozoneId(),
                     lampInfo.getLatitude(),
                     lampInfo.getLongitude(),
-                    gzone.getCountry(),
-                    gzone.getCountry(),
+                    lampInfo.getCountry(),
+                    lampInfo.getState(),
+//                    gzone.getCountry(),
+//                    gzone.getCountry(),
 //                    lampInfo.getAddress()
                     //这个地方有问题，暂时这样处理
-                    null
+                    lampInfo.getStreet()
             );
             DeviceControl dc = new DeviceControl();
             dc.setDeviceId(lampInfo.getDeviceId());
@@ -250,11 +257,12 @@ public class DeviceServiceImpl implements IDeviceService{
             List<Object> list = new ArrayList<Object>();
             list.add(deviceInfo);
             list.add(deviceLocationInfo);
-//            list.add(pageAlarm);
+            list.add(pageAlarm);
             list.add(dc);
             result.setStatusCode("000000");
             result.setData(list);
         } catch (Exception e) {
+            e.printStackTrace();
             result.setStatusCode("999999");
             result.setMessage("Query Exception");
             e.printStackTrace();
@@ -323,6 +331,9 @@ public class DeviceServiceImpl implements IDeviceService{
             info.setGeozoneId(deviceLocationInfo.getGeoZone());
             info.setLatitude(deviceLocationInfo.getLatitude());
             info.setLongitude(deviceLocationInfo.getLongitude());
+            info.setCountry(deviceLocationInfo.getCountry());
+            info.setState(deviceLocationInfo.getCity());
+            info.setStreet(deviceLocationInfo.getAddress());
             repository.save(info);
         } catch (Exception e) {
             e.printStackTrace();
@@ -720,7 +731,7 @@ public class DeviceServiceImpl implements IDeviceService{
         if (null != id && !id.equals("")) {
             DeviceInfoEntity info = repository.findOne(id);
             infoDetail.setLampInfo(info);
-            DeviceModelEntity modelConfig = deviceModelDao.findByDeviceModelId(info.getDeviceId());
+            DeviceModelEntity modelConfig = deviceModelDao.findByDeviceModelId(info.getDeviceModelId());
             DeviceModelEntity luminaire = new DeviceModelEntity();
             if (null != modelConfig) {
                 luminaire.setDescription(modelConfig.getDescription());
@@ -837,5 +848,17 @@ public class DeviceServiceImpl implements IDeviceService{
                 return query.getRestriction();
             }
         };
+    }
+
+    public List<DeviceAlarmsEntity> getLimAlarmInfo(RequestObject obj) {
+        System.out.println("showNum = [" + obj.getShowNum() + "], , lampId = [" + obj.getLampId() + "]");
+        List<DeviceAlarmsEntity> listAlarm = null;
+        Pageable pageable= new PageRequest(0, obj.getShowNum(),Sort.Direction.DESC,"createTime");
+        try {
+            listAlarm = deviceAlarmsRepository.findBySource(pageable, obj.getLampId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listAlarm;
     }
 }

@@ -52,7 +52,7 @@ public class GeoZoneServiceImpl implements IGeoZoneService {
     public GeoZoneEntity findGZoneByName(Integer name) {
         GeoZoneEntity gZone = null;
         if (null != name && !name.equals("")) {
-            gZone = repository.findByName(name);
+            gZone = repository.findByGeozoneId(name);
         }
         return gZone;
     }

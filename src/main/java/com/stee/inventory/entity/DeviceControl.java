@@ -20,7 +20,7 @@ public class DeviceControl {
 	/**
 	 * Lamp [On/Off]
 	 */
-	private boolean lampSwitch;
+	private Boolean lampSwitch;
 
 	/**
 	 * Control mode: Manual/Automatic
@@ -47,11 +47,11 @@ public class DeviceControl {
 		this.lampLevel = lampLevel;
 	}
 
-	public boolean isLampSwitch() {
+	public Boolean isLampSwitch() {
 		return lampSwitch;
 	}
 
-	public void setLampSwitch(boolean lampSwitch) {
+	public void setLampSwitch(Boolean lampSwitch) {
 		this.lampSwitch = lampSwitch;
 	}
 

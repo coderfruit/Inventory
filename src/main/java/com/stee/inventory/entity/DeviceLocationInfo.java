@@ -8,8 +8,8 @@ public class DeviceLocationInfo {
 	private String country;
 	private String city;
 	private String address;
-	
-	
+
+
 	public void setDeviceLocationInfo(Integer geoZone, Double latitude, Double longitude, String country, String city,
 			String address) {
 		this.geoZone = geoZone;
@@ -55,7 +55,7 @@ public class DeviceLocationInfo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -67,5 +67,5 @@ public class DeviceLocationInfo {
 		return "DeviceLocationInfo [deviceId=" + deviceId + ", geoZone=" + geoZone + ", latitude=" + latitude
 				+ ", longitude=" + longitude + ", country=" + country + ", city=" + city + ", address=" + address + "]";
 	}
-	
+
 }

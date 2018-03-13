@@ -49,6 +49,8 @@ public class DeviceInfoEntity {
 	/**
 	 * Device ID (Must be Unique)
 	 */
+	@Transient
+	private String lampPoleModelId;
 	@Id
 	@Column(name = "device_id")
 	private String deviceId;
@@ -134,7 +136,7 @@ public class DeviceInfoEntity {
 	 * Switch Feedback
 	 */
 	@Column(name = "switch_feedback")
-	private boolean switchFeedback;
+	private Boolean switchFeedback;
 	
 	/**
 	 * Current Flow
@@ -195,8 +197,22 @@ public class DeviceInfoEntity {
 	 */
 	@Column(name="device_model_id")
 	private String deviceModelId;
-	
+
+
+	public String getLampPoleModelId() {
+		return lampPoleModelId;
+	}
+
+	public void setLampPoleModelId(String lampPoleModelId) {
+		this.lampPoleModelId = lampPoleModelId;
+	}
+
+	public Boolean getSwitchFeedback() {
+		return switchFeedback;
+	}
+
 	/******************set get*******************/
+
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -294,10 +310,10 @@ public class DeviceInfoEntity {
 	public void setLevelFeedback(Integer levelFeedback) {
 		this.levelFeedback = levelFeedback;
 	}
-	public boolean isSwitchFeedback() {
+	public Boolean isSwitchFeedback() {
 		return switchFeedback;
 	}
-	public void setSwitchFeedback(boolean switchFeedback) {
+	public void setSwitchFeedback(Boolean switchFeedback) {
 		this.switchFeedback = switchFeedback;
 	}
 	public Double getCurrentFlow() {
