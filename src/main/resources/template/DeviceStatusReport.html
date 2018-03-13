@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>ECharts</title>
+<style>
+body {
+	font-family: SimHei;
+}
+
+table th, table td {
+	padding: 0 4px;
+	text-align:center;
+}
+
+@page {   
+      
+    margin: 0.25in;   
+    padding: 1em;  
+    @top-center { content: element(header) };  
+    @bottom-right{  
+            content:counter(page)"/"counter(pages);  
+            font-family: SimSun;   
+        font-size: 16px;  
+        color:#000;  
+                };  
+          }  
+             
+          div#myheader {  
+        display: block;  
+        position: running(header);  
+    }   
+  
+  
+#pagenumber:before {  
+content: counter(page);   
+}  
+  
+#pagecount:before {  
+content: counter(pages);    
+} 
+</style>
+ <prop key="classic_compatible">true</prop>
+</head>
+
+<body>
+	<div style="width:100%;">
+		<h1 style="text-align:center">${DSRCondition.name?if_exists}</h1>
+		<ul style="padding:5px 10px 30px;height:auto;overflow:hidden;position:relative;list-style:none;">
+			<li style="padding:10px"> Data Type: ${DSRCondition.name?if_exists} </li>
+			<li style="padding:10px"> Start Date: ${DSRCondition.startDate?if_exists}  </li>
+			<li style="padding:10px"> End Date: ${DSRCondition.endDate?if_exists}  </li>
+			<li style="padding:10px"> Export Time: ${DSRCondition.exportTime?if_exists} </li>
+		</ul>
+	</div>
+	<div
+		style="text-align: center; margin-bottom: 60px; height: auto; overflow: hidden; width: 100%;">
+		<img src="report.png"
+			style="width: 100%; max-width: 640px; height: 400px" />
+	</div>
+	
+	<table border="1px"
+		style="width: 100%; border-collapse: collapse; border: 1px solid #ccc; line-height: 28px;">
+		<tr>
+		<td align="center">#</td>
+		<th>Date</th>
+		<th>${DSRCondition.name?if_exists}(${unit?if_exists})</th>
+		</tr>
+		<#list DSRReport?if_exists as e>
+		<tr>
+			<td align="center">${e_index?if_exists+1}</td>
+			<td>${e.formatDate}<br /></td>
+			<td>${e.data}<br /></td>
+		</tr>
+		</#list>
+	</table>
+	
+<div style="position:relative;text-align:right;padding-top:50px">
+	<p style="text-align:right;margin-left:5px;">
+	<p style="height:15px;line-height:15px"> ${DSRCondition.name?if_exists} Grand Total(${totalItem?if_exists} Records): ${totalData?if_exists} ${unit?if_exists}</p>
+	</p>
+</div>
+
+</body>
+</html>
