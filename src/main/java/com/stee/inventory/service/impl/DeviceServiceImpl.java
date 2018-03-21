@@ -175,10 +175,17 @@ public class DeviceServiceImpl implements IDeviceService{
          Pageable pageable= new PageRequest(pageNo-1, pageSize);
         try {
             page = repository.findAll(where(type,name), pageable);
-            //TODO
+            List<String> ids = new ArrayList<String>();
             page.getContent().forEach(deviceInfoEntity -> {
-                LampPoleEntity lampPole = lampPoleDao.findByLampPoleId(deviceInfoEntity.getLampPoleId());
-                deviceInfoEntity.setLampPoleModelId(lampPole.getLampPoleModelId());
+            	ids.add(deviceInfoEntity.getLampPoleId());
+            });
+            List<LampPoleEntity> lampPoleList = lampPoleDao.findByPoleList(ids);
+            Map<String,String> lampMap = new HashMap<String,String>();
+            for(LampPoleEntity lp : lampPoleList){
+            	lampMap.put(lp.getLampPoleId(), lp.getLampPoleModelId());
+            }
+            page.getContent().forEach(deviceInfoEntity -> {
+                deviceInfoEntity.setLampPoleModelId(lampMap.get(deviceInfoEntity.getLampPoleId()));
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -226,16 +233,19 @@ public class DeviceServiceImpl implements IDeviceService{
             if(date!=null){
                 installedDate = format.format(date);
             }
+            String picture = "";
+            if(modelConfig!=null){
+            	picture = modelConfig.getPicture();
+            }
             DeviceInfo deviceInfo = new DeviceInfo();
             deviceInfo.setDeviceInfo(lampInfo.getName(),
                     lampInfo.getDeviceId(),
                     lampInfo.getDeviceModelId(),
                     lampInfo.getLampPoleId(),
 //                    lampInfo.getLampPole().getModelId(),
-                    //这个地方有问题，暂时这样处理
-                    null,
+                    lampPole.getLampPoleModelId(),
                     installedDate,
-                    modelConfig.getPicture());
+                    picture);
             DeviceLocationInfo deviceLocationInfo = new DeviceLocationInfo();
             deviceLocationInfo.setDeviceLocationInfo(lampInfo.getGeozoneId(),
                     lampInfo.getLatitude(),
@@ -291,6 +301,7 @@ public class DeviceServiceImpl implements IDeviceService{
         Result result = new Result();
         try {
             DeviceInfoEntity info = repository.findOne(deviceInfo.getDeviceId());
+           
             if(info==null){
                 result.setStatusCode("999999");
                 result.setMessage("Device ID does not exist");
@@ -300,7 +311,7 @@ public class DeviceServiceImpl implements IDeviceService{
             info.setDeviceModelId(deviceInfo.getLuminaireModelId());
             info.setLampPoleId(deviceInfo.getLampPoleId());
 //            info.getLampPole().setModelId(deviceInfo.getLampPoleModelId());
-            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String installedDate = deviceInfo.getInstalledDate();
             if(installedDate!=null&&installedDate.length()>0){
                 info.setInstallationDate(format.parse(installedDate));
@@ -312,6 +323,16 @@ public class DeviceServiceImpl implements IDeviceService{
             result.setMessage("Save exception");
             return result;
         }
+        try {
+        	 LampPoleEntity lampPole = lampPoleDao.findByLampPoleId(deviceInfo.getLampPoleId());
+        	 lampPole.setLampPoleModelId(deviceInfo.getLampPoleModelId());
+        	 lampPoleDao.save(lampPole);
+		} catch (Exception e) {
+            e.printStackTrace();
+            result.setStatusCode("999999");
+            result.setMessage("Lamp Pole Model ID OR Lamp Pole ID Not Exist");
+            return result;
+		}
         result.setStatusCode("000000");
         result.setMessage("Save success");
         return result;
