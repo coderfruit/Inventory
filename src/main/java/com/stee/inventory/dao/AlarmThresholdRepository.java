@@ -1,7 +1,6 @@
 package com.stee.inventory.dao;
 
-import com.stee.inventory.entity.AlarmThreshold;
-import com.stee.inventory.entity.sel.CalendarProfileEntity;
+import com.stee.sel.inventory.AlarmThreshold;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

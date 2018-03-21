@@ -1,6 +1,6 @@
 package com.stee.inventory.dao;
 
-import com.stee.inventory.entity.sel.CalendarProfileEntity;
+import com.stee.sel.dc.CalendarProfileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

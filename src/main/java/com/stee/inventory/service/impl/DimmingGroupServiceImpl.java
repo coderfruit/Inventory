@@ -22,8 +22,8 @@ package com.stee.inventory.service.impl;
 
 import com.google.common.collect.Lists;
 import com.stee.inventory.dao.DimmingGroupRepository;
-import com.stee.inventory.entity.sel.DimmingGroupEntity;
 import com.stee.inventory.service.IDimmingGroupService;
+import com.stee.sel.dc.DimmingGroupEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

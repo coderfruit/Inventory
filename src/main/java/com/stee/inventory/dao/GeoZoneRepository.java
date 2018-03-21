@@ -1,8 +1,7 @@
 package com.stee.inventory.dao;
 
+import com.stee.sel.gis.GeoZoneEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.stee.inventory.entity.sel.GeoZoneEntity;
 
 /**
  * Created by SerryMiano on 2017/1/10.

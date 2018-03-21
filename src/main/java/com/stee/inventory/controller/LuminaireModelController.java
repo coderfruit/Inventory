@@ -1,10 +1,9 @@
 package com.stee.inventory.controller;
 
-import com.stee.inventory.entity.DeviceModel;
 import com.stee.inventory.entity.LuminaireQueryBean;
-import com.stee.inventory.entity.sel.DeviceModelEntity;
 import com.stee.inventory.service.IDeviceModelService;
 import com.stee.sel.common.ResultData;
+import com.stee.sel.inventory.DeviceModelEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

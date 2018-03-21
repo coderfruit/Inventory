@@ -1,13 +1,8 @@
 package com.stee.inventory.service;
 
-import com.stee.inventory.entity.Co2EmissionFactor;
-import com.stee.inventory.entity.DeviceModel;
 import com.stee.inventory.entity.LuminaireQueryBean;
-import com.stee.inventory.entity.Result;
-import com.stee.inventory.entity.sel.DeviceModelEntity;
 import com.stee.sel.common.ResultData;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.stee.sel.inventory.DeviceModelEntity;
 
 public interface IDeviceModelService {
 //    Result<Page<DeviceModel>> getAll(Pageable pageable);

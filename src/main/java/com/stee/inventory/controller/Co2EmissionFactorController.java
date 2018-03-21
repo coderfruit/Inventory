@@ -1,12 +1,8 @@
 package com.stee.inventory.controller;
 
-import com.stee.inventory.entity.Co2EmissionFactor;
-import com.stee.inventory.entity.Result;
 import com.stee.inventory.service.ICo2EmissionFactorService;
 import com.stee.sel.common.ResultData;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import com.stee.sel.inventory.Co2EmissionFactor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -1,8 +1,7 @@
 package com.stee.inventory.dao;
 
-import com.stee.inventory.entity.sel.DeviceAlarmsEntity;
+import com.stee.sel.alarm.DeviceAlarmsEntity;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

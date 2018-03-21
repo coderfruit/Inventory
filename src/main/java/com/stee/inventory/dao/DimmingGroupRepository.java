@@ -1,6 +1,6 @@
 package com.stee.inventory.dao;
 
-import com.stee.inventory.entity.sel.DimmingGroupEntity;
+import com.stee.sel.dc.DimmingGroupEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

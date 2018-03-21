@@ -20,9 +20,9 @@
  */
 package com.stee.inventory.entity.sel;
 
-import com.stee.inventory.entity.DeviceModel;
-import com.stee.inventory.entity.LampPoleModel;
-import com.stee.inventory.entity.sel.DeviceInfoEntity;
+import com.stee.sel.inventory.DeviceInfoEntity;
+import com.stee.sel.inventory.DeviceModelEntity;
+import com.stee.sel.inventory.LampPoleEntity;
 
 /**
  * Created by SerryMiano on 2017/1/10.

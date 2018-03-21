@@ -1,8 +1,8 @@
 package com.stee.inventory.service;
 
-import java.util.List;
+import com.stee.sel.gis.GeoZoneEntity;
 
-import com.stee.inventory.entity.sel.GeoZoneEntity;
+import java.util.List;
 
 /**
  * Created by SerryMiano on 2017/1/10.

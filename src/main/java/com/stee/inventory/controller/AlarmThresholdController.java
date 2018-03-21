@@ -1,18 +1,13 @@
 package com.stee.inventory.controller;
 
-import com.stee.inventory.dao.LampPoleModelDao;
-import com.stee.inventory.entity.AlarmThreshold;
-import com.stee.inventory.entity.LampPoleModel;
-import com.stee.inventory.entity.PoleQueryBean;
 import com.stee.inventory.entity.Result;
 import com.stee.inventory.service.IAlarmThresholdService;
-import com.stee.inventory.service.ILampPoleModelService;
-import com.stee.sel.common.ResultData;
+import com.stee.sel.inventory.AlarmThreshold;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
 
 /* Copyright (C) 2016, ST Electronics Info-Comm Systems PTE. LTD
  * All rights reserved.
@@ -36,6 +31,9 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping(value = "/threshold")
+@ComponentScan(basePackages = {"com.stee.sel"})
+@EntityScan({"com.stee.sel.inventory","com.stee.sel.report","com.stee.sel.dc","com.stee.sel.gis","com.stee.sel.constant",
+        "com.stee.sel.secutiry","com.stee.sel.common","com.stee.sel.field","com.stee.sel.inf","com.stee.sel.secutiry","com.stee.sel.alarm"})
 public class AlarmThresholdController {
     @Resource
     private IAlarmThresholdService service;

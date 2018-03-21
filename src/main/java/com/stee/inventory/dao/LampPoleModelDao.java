@@ -1,19 +1,18 @@
 package com.stee.inventory.dao;
 
-import java.util.List;
-
+import com.stee.sel.inventory.LampPoleModelEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import com.stee.inventory.entity.LampPoleModel;
+import java.util.List;
 
-public interface LampPoleModelDao extends JpaRepository<LampPoleModel,String>,JpaSpecificationExecutor<LampPoleModel> {
-    List<LampPoleModel> findByLampPoleModelIdLike(String id);
+public interface LampPoleModelDao extends JpaRepository<LampPoleModelEntity,String>,JpaSpecificationExecutor<LampPoleModelEntity> {
+    List<LampPoleModelEntity> findByLampPoleModelIdLike(String id);
 
-    Page<LampPoleModel> findAll(Specification<LampPoleModel> var1,Pageable pageable);
+    Page<LampPoleModelEntity> findAll(Specification<LampPoleModelEntity> var1,Pageable pageable);
 
-    LampPoleModel findByLampPoleModelId(String id);
+    LampPoleModelEntity findByLampPoleModelId(String id);
 }

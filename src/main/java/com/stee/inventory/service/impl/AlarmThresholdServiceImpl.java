@@ -1,16 +1,17 @@
 package com.stee.inventory.service.impl;
 
+
 import com.stee.inventory.Exception.ServiceException;
 import com.stee.inventory.dao.AlarmThresholdRepository;
-import com.stee.inventory.entity.AlarmThreshold;
 import com.stee.inventory.entity.Result;
 import com.stee.inventory.service.IAlarmThresholdService;
+import com.stee.sel.inventory.AlarmThreshold;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 @Service
-public class AlarmThresholdServiceImpl implements IAlarmThresholdService{
+public class AlarmThresholdServiceImpl implements IAlarmThresholdService {
 
     @Resource
     private AlarmThresholdRepository repository;

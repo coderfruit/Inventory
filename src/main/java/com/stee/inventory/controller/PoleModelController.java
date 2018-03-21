@@ -1,10 +1,10 @@
 package com.stee.inventory.controller;
 
 import com.stee.inventory.dao.LampPoleModelDao;
-import com.stee.inventory.entity.LampPoleModel;
 import com.stee.inventory.entity.PoleQueryBean;
 import com.stee.inventory.service.ILampPoleModelService;
 import com.stee.sel.common.ResultData;
+import com.stee.sel.inventory.LampPoleModelEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -46,7 +46,7 @@ public class PoleModelController {
      * @author Jerry
      */
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public ResultData<LampPoleModel> getAll() {
+    public ResultData<LampPoleModelEntity> getAll() {
         return poleService.getAll();
     }
 
@@ -58,7 +58,7 @@ public class PoleModelController {
      * @author Jerry
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Map<String, String> save(@RequestBody LampPoleModel config) {
+    public Map<String, String> save(@RequestBody LampPoleModelEntity config) {
         Map<String, String> map = new HashMap<>();
         map.put("status", poleService.save(config));
         return map;
@@ -67,7 +67,7 @@ public class PoleModelController {
     // TODO Delete...
     @Deprecated
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestBody LampPoleModel config) {
+    public String update(@RequestBody LampPoleModelEntity config) {
         return poleService.save(config);
     }
 
@@ -98,7 +98,7 @@ public class PoleModelController {
     }
 
     @RequestMapping(value = "/query/name/like", method = RequestMethod.POST)
-    public ResultData<LampPoleModel> findByNameLike(@RequestBody(required = false) PoleQueryBean query) {
+    public ResultData<LampPoleModelEntity> findByNameLike(@RequestBody(required = false) PoleQueryBean query) {
         return poleService.findByQueryBean(query);
     }
 }

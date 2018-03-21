@@ -1,24 +1,24 @@
 package com.stee.inventory.service.impl;
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
+import com.lowagie.text.DocumentException;
 import com.stee.inventory.dao.*;
-import com.stee.inventory.entity.sel.*;
+import com.stee.inventory.dto.Result;
+import com.stee.inventory.entity.DeviceControl;
+import com.stee.inventory.entity.DeviceInfo;
+import com.stee.inventory.entity.DeviceLocationInfo;
+import com.stee.inventory.entity.RequestObject;
+import com.stee.inventory.entity.sel.LampInfoDetail;
+import com.stee.inventory.service.IDeviceService;
+import com.stee.inventory.utils.Utils;
+import com.stee.sel.alarm.DeviceAlarmsEntity;
+import com.stee.sel.common.ResultData;
+import com.stee.sel.constant.ResponseCode;
+import com.stee.sel.field.ResultFieldConfig;
+import com.stee.sel.gis.GeoZoneEntity;
+import com.stee.sel.inventory.DeviceInfoEntity;
+import com.stee.sel.inventory.DeviceModelEntity;
+import com.stee.sel.inventory.LampPoleEntity;
+import com.stee.sel.report.DeviceDataStatsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,17 +26,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.lowagie.text.DocumentException;
-import com.stee.inventory.dto.Result;
-import com.stee.inventory.entity.DeviceControl;
-import com.stee.inventory.entity.DeviceInfo;
-import com.stee.inventory.entity.DeviceLocationInfo;
-import com.stee.inventory.entity.RequestObject;
-import com.stee.inventory.service.IDeviceService;
-import com.stee.inventory.utils.Utils;
-import com.stee.sel.common.ResultData;
-import com.stee.sel.constant.ResponseCode;
-import com.stee.sel.field.ResultFieldConfig;
+import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class DeviceServiceImpl implements IDeviceService{

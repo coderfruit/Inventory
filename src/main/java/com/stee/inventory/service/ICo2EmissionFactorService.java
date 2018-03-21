@@ -1,10 +1,7 @@
 package com.stee.inventory.service;
 
-import com.stee.inventory.entity.Co2EmissionFactor;
-import com.stee.inventory.entity.Result;
 import com.stee.sel.common.ResultData;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.stee.sel.inventory.Co2EmissionFactor;
 
 public interface ICo2EmissionFactorService {
 //    Result save(Co2EmissionFactor Co2EmissionFactor);

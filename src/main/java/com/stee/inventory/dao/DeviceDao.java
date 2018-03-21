@@ -1,6 +1,6 @@
 package com.stee.inventory.dao;
 
-import com.stee.inventory.entity.sel.DeviceInfoEntity;
+import com.stee.sel.inventory.DeviceInfoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

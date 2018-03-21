@@ -1,19 +1,13 @@
 package com.stee.inventory.service.impl;
 
-import com.stee.inventory.Exception.ServiceException;
 import com.stee.inventory.dao.Co2EmissionFactorDao;
-import com.stee.inventory.entity.Co2EmissionFactor;
-import com.stee.inventory.entity.Result;
 import com.stee.inventory.service.ICo2EmissionFactorService;
 import com.stee.inventory.utils.ConfigUtil;
-import com.stee.inventory.utils.PropUtils;
 import com.stee.sel.common.ResultData;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.stee.sel.inventory.Co2EmissionFactor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class Co2EmissionFactorServiceImpl implements ICo2EmissionFactorService {

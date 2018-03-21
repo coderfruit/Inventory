@@ -1,20 +1,14 @@
 package com.stee.inventory.service.impl;
 
 import com.google.common.collect.Lists;
-import com.stee.inventory.Exception.ServiceException;
 import com.stee.inventory.dao.LampPoleModelDao;
-import com.stee.inventory.entity.LampPoleModel;
 import com.stee.inventory.entity.PoleQueryBean;
-import com.stee.inventory.entity.Result;
 import com.stee.inventory.service.ILampPoleModelService;
 import com.stee.sel.common.ResultData;
 import com.stee.sel.constant.ResponseCode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.stee.sel.inventory.LampPoleModelEntity;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -33,10 +27,10 @@ public class LampPoleModelServiceImpl implements ILampPoleModelService{
     private LampPoleModelDao lampPoleModelDao;
 
     @Override
-    public ResultData<LampPoleModel> getAll() {
-        ResultData<LampPoleModel> resultData = new ResultData<>();
+    public ResultData<LampPoleModelEntity> getAll() {
+        ResultData<LampPoleModelEntity> resultData = new ResultData<>();
         try {
-            List<LampPoleModel> findAll = lampPoleModelDao.findAll();
+            List<LampPoleModelEntity> findAll = lampPoleModelDao.findAll();
             resultData.setData(findAll);
             resultData.setStatus(ResponseCode.SUCCESS.getCode());
         } catch (Exception e) {
@@ -47,7 +41,7 @@ public class LampPoleModelServiceImpl implements ILampPoleModelService{
     }
 
     @Override
-    public String save(LampPoleModel config) {
+    public String save(LampPoleModelEntity config) {
         if (null != config) {
             try {
                 lampPoleModelDao.save(config);
@@ -63,11 +57,11 @@ public class LampPoleModelServiceImpl implements ILampPoleModelService{
 
     @Override
     public boolean isNameExits(String name) {
-        LampPoleModel poleModelConfig = new LampPoleModel();
+        LampPoleModelEntity poleModelConfig = new LampPoleModelEntity();
         poleModelConfig.setLampPoleModelId(name);
         ExampleMatcher NAME_MATCHER = ExampleMatcher.matching().withMatcher("name",
                 ExampleMatcher.GenericPropertyMatchers.ignoreCase());
-        Example<LampPoleModel> example = Example.<LampPoleModel>of(poleModelConfig, NAME_MATCHER);
+        Example<LampPoleModelEntity> example = Example.<LampPoleModelEntity>of(poleModelConfig, NAME_MATCHER);
 
         return lampPoleModelDao.exists(example);
     }
@@ -84,9 +78,9 @@ public class LampPoleModelServiceImpl implements ILampPoleModelService{
     }
 
     @Override
-    public ResultData<LampPoleModel> findByQueryBean(PoleQueryBean query) {
-        ResultData<LampPoleModel> resultData = new ResultData<>();
-        List<LampPoleModel> list = Lists.newArrayList();
+    public ResultData<LampPoleModelEntity> findByQueryBean(PoleQueryBean query) {
+        ResultData<LampPoleModelEntity> resultData = new ResultData<>();
+        List<LampPoleModelEntity> list = Lists.newArrayList();
         if (null == query) {
             resultData.setStatus(ResponseCode.ERROR_PARAM.getCode());
             try {
@@ -166,11 +160,11 @@ public class LampPoleModelServiceImpl implements ILampPoleModelService{
 //            }
 //        }
 //
-    private Specification<LampPoleModel> where(final String id, final String desc, final Double heightStart, final Double heightEnd) {
-        return new Specification<LampPoleModel>() {
+    private Specification<LampPoleModelEntity> where(final String id, final String desc, final Double heightStart, final Double heightEnd) {
+        return new Specification<LampPoleModelEntity>() {
 
             @Override
-            public Predicate toPredicate(Root<LampPoleModel> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+            public Predicate toPredicate(Root<LampPoleModelEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
                 if (null != id && !id.equals("")) {
                     predicates.add(cb.like(root.<String>get("lampPoleModelId"),"%" +  id + "%"));

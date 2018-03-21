@@ -1,35 +1,29 @@
 package com.stee.inventory.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.stee.inventory.dto.Result;
 import com.stee.inventory.entity.DeviceInfo;
 import com.stee.inventory.entity.DeviceLocationInfo;
 import com.stee.inventory.entity.RequestObject;
-import com.stee.inventory.entity.sel.DeviceInfoEntity;
-import com.stee.inventory.entity.sel.DeviceModelEntity;
-import com.stee.inventory.entity.sel.GeoZoneEntity;
 import com.stee.inventory.entity.sel.LampInfoDetail;
 import com.stee.inventory.service.ICalendarProfileService;
 import com.stee.inventory.service.IDeviceService;
 import com.stee.inventory.service.IDimmingGroupService;
 import com.stee.inventory.service.IGeoZoneService;
-//import com.stee.inventory.service.ILampInfoService;
 import com.stee.inventory.utils.Utils;
 import com.stee.sel.common.ResultData;
+import com.stee.sel.gis.GeoZoneEntity;
+import com.stee.sel.inventory.DeviceInfoEntity;
+import com.stee.sel.inventory.DeviceModelEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
+
+//import com.stee.inventory.service.ILampInfoService;
 
 /* Copyright (C) 2016, ST Electronics Info-Comm Systems PTE. LTD
  * All rights reserved.

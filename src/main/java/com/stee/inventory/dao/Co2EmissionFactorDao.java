@@ -1,8 +1,6 @@
 package com.stee.inventory.dao;
 
-import com.stee.inventory.entity.Co2EmissionFactor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.stee.sel.inventory.Co2EmissionFactor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,18 +1,10 @@
 package com.stee.inventory.controller;
 
 import com.stee.inventory.dao.LampPoleDao;
-import com.stee.inventory.entity.LampPole;
-import com.stee.inventory.entity.LampPoleModel;
-import com.stee.inventory.entity.PoleQueryBean;
-import com.stee.inventory.entity.Result;
-import com.stee.inventory.service.ILampPoleModelService;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * lamp model configuration

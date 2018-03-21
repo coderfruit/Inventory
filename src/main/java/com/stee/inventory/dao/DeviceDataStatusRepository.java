@@ -1,7 +1,6 @@
 package com.stee.inventory.dao;
 
-import com.stee.inventory.entity.AlarmThreshold;
-import com.stee.inventory.entity.sel.DeviceDataStatsEntity;
+import com.stee.sel.report.DeviceDataStatsEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

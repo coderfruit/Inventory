@@ -1,13 +1,8 @@
 package com.stee.inventory.service;
 
-import com.stee.inventory.entity.LampPoleModel;
 import com.stee.inventory.entity.PoleQueryBean;
-import com.stee.inventory.entity.Result;
 import com.stee.sel.common.ResultData;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
+import com.stee.sel.inventory.LampPoleModelEntity;
 
 public interface ILampPoleModelService {
 //    Result<Page<LampPoleModel>> getAll(Pageable pageable);
@@ -19,13 +14,13 @@ public interface ILampPoleModelService {
 //    Result delete(String id);
 //
 //    Result<Page<LampPoleModel>> findByQueryBean(PoleQueryBean name,Pageable pageable);
-    ResultData<LampPoleModel> getAll();
+    ResultData<LampPoleModelEntity> getAll();
 
-    String save(LampPoleModel config);
+    String save(LampPoleModelEntity config);
 
     boolean isNameExits(String name);
 
     String delete(String id);
 
-    ResultData<LampPoleModel> findByQueryBean(PoleQueryBean query);
+    ResultData<LampPoleModelEntity> findByQueryBean(PoleQueryBean query);
 }
