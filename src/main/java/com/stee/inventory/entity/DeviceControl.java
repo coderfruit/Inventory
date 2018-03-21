@@ -25,7 +25,7 @@ public class DeviceControl {
 	/**
 	 * Control mode: Manual/Automatic
 	 */
-	private ControlMode controlMode;
+	private String controlMode;
 
 	private Date commissionDate;
 	
@@ -55,11 +55,11 @@ public class DeviceControl {
 		this.lampSwitch = lampSwitch;
 	}
 
-	public ControlMode getControlMode() {
+	public String getControlMode() {
 		return controlMode;
 	}
 
-	public void setControlMode(ControlMode controlMode) {
+	public void setControlMode(String controlMode) {
 		this.controlMode = controlMode;
 	}
 

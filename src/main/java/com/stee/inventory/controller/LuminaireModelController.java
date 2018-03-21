@@ -58,11 +58,7 @@ public class LuminaireModelController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Map<String, String> save(@RequestBody DeviceModelEntity config) {
 		Map<String, String> map = new HashMap<>();
-		System.out.println("-----------"+config.getPicture()+"-----------");
-//		byte[] bytes = config.getPictureInfo().getBytes();
-//		config.setPicture(bytes);
 		map.put("status", luminaireService.save(config));
-//		System.out.println(config.getPictureInfo());
 		return map;
 	}
 
