@@ -1,6 +1,7 @@
 package com.stee.inventory.service.impl;
 
 import com.google.common.collect.Lists;
+import com.stee.inventory.dao.LampPoleDao;
 import com.stee.inventory.dao.LampPoleModelDao;
 import com.stee.inventory.entity.PoleQueryBean;
 import com.stee.inventory.service.ILampPoleModelService;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -25,6 +27,8 @@ public class LampPoleModelServiceImpl implements ILampPoleModelService{
 
     @Resource
     private LampPoleModelDao lampPoleModelDao;
+    @Resource
+    private LampPoleDao lampPoleDao;
 
     @Override
     public ResultData<LampPoleModelEntity> getAll() {
@@ -66,9 +70,11 @@ public class LampPoleModelServiceImpl implements ILampPoleModelService{
         return lampPoleModelDao.exists(example);
     }
 
+    @Transactional
     @Override
     public String delete(String id) {
         try {
+            lampPoleDao.deleteByLampPoleModelId(id);
             lampPoleModelDao.delete(id);
         } catch (Exception e) {
             e.printStackTrace();

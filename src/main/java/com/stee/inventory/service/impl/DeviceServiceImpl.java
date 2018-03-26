@@ -152,7 +152,7 @@ public class DeviceServiceImpl implements IDeviceService{
 
     @Override
     public void updatePolling(List<DeviceInfoEntity> list) {
-        if (list.isEmpty()) {
+        if (!list.isEmpty()) {
             try {
                 repository.save(list);
             } catch (Exception e) {
@@ -748,7 +748,7 @@ public class DeviceServiceImpl implements IDeviceService{
     public LampInfoDetail findLampDetailInfo(String id) {
         LampInfoDetail infoDetail = new LampInfoDetail();
         if (null != id && !id.equals("")) {
-            DeviceInfoEntity info = repository.findOne(id);
+            DeviceInfoEntity info = repository.findByDeviceId(id);
             infoDetail.setLampInfo(info);
             DeviceModelEntity modelConfig = deviceModelDao.findByDeviceModelId(info.getDeviceModelId());
             DeviceModelEntity luminaire = new DeviceModelEntity();

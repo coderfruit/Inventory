@@ -9,4 +9,5 @@ import java.util.List;
 public interface DeviceDao extends JpaRepository<DeviceInfoEntity,String>,JpaSpecificationExecutor<DeviceInfoEntity>{
         List<DeviceInfoEntity> findByGeozoneId(Integer geoZoneId);
         DeviceInfoEntity findByDeviceId(String id);
+        DeviceInfoEntity findByName(String name);
 }
