@@ -264,7 +264,7 @@ public class LampInformationController {
      * @return
      */
     @RequestMapping(value = "/geozones/name/list", method = RequestMethod.GET)
-    List<String> getGeoZoneIds() {
+    List<GeoZoneEntity> getGeoZoneIds() {
         return gzs.getGeoZoneIds();
     }
 

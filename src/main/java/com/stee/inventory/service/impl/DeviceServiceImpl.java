@@ -18,6 +18,7 @@ import com.stee.sel.gis.GeoZoneEntity;
 import com.stee.sel.inventory.DeviceInfoEntity;
 import com.stee.sel.inventory.DeviceModelEntity;
 import com.stee.sel.inventory.LampPoleEntity;
+import com.stee.sel.inventory.LampPoleModelEntity;
 import com.stee.sel.report.DeviceDataStatsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -748,7 +749,9 @@ public class DeviceServiceImpl implements IDeviceService{
     public LampInfoDetail findLampDetailInfo(String id) {
         LampInfoDetail infoDetail = new LampInfoDetail();
         if (null != id && !id.equals("")) {
-            DeviceInfoEntity info = repository.findByDeviceId(id);
+            //因为前段传入的是name,所以根据名字查询,注意名字不能重复
+            //按道理来讲应该传id进来，由于前端遗留问题，所以传入的是name
+            DeviceInfoEntity info = repository.findByName(id);
             infoDetail.setLampInfo(info);
             DeviceModelEntity modelConfig = deviceModelDao.findByDeviceModelId(info.getDeviceModelId());
             DeviceModelEntity luminaire = new DeviceModelEntity();
@@ -769,6 +772,7 @@ public class DeviceServiceImpl implements IDeviceService{
 //            }
             infoDetail.setLuminaire(luminaire);
             LampPoleEntity poleModelConfig = lampPoleDao.findByLampPoleId(info.getLampPoleId());
+            LampPoleModelEntity lampPoleModel = lampPoleModelDao.findByLampPoleModelId(poleModelConfig.getLampPoleModelId());
 //            if (null == poleModelConfig) {
 //                LampPoleEntity poleModelConfig1 = new LampPoleEntity();
 //                poleModelConfig1.set
@@ -780,6 +784,7 @@ public class DeviceServiceImpl implements IDeviceService{
 //                infoDetail.setPole(poleModelConfig1);
 //            } else {
                 infoDetail.setPole(poleModelConfig);
+                infoDetail.setPoleModel(lampPoleModel);
 //            }
         }
         return infoDetail;

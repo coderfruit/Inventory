@@ -38,13 +38,13 @@ public class GeoZoneServiceImpl implements IGeoZoneService {
     GeoZoneRepository repository;
 
     @Override
-    public List<String> getGeoZoneIds() {
+    public List<GeoZoneEntity> getGeoZoneIds() {
         List<String> list = Lists.newArrayList();
         List<GeoZoneEntity> zones = repository.findAll();
-        zones.forEach(zone -> {
-            list.add(zone.getName());
-        });
-        return list;
+//        zones.forEach(zone -> {
+//            list.add(zone.getName());
+//        });
+        return zones;
     }
 
     @Override

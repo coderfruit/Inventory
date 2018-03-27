@@ -23,6 +23,7 @@ package com.stee.inventory.entity.sel;
 import com.stee.sel.inventory.DeviceInfoEntity;
 import com.stee.sel.inventory.DeviceModelEntity;
 import com.stee.sel.inventory.LampPoleEntity;
+import com.stee.sel.inventory.LampPoleModelEntity;
 
 /**
  * Created by SerryMiano on 2017/1/10.
@@ -38,6 +39,8 @@ public class LampInfoDetail {
      * 灯柱
      */
     private LampPoleEntity pole;
+
+    private LampPoleModelEntity poleModel;
 
     /**
      * 灯具
@@ -66,6 +69,14 @@ public class LampInfoDetail {
 
     public void setLuminaire(DeviceModelEntity luminaire) {
         this.luminaire = luminaire;
+    }
+
+    public LampPoleModelEntity getPoleModel() {
+        return poleModel;
+    }
+
+    public void setPoleModel(LampPoleModelEntity poleModel) {
+        this.poleModel = poleModel;
     }
 
     @Override
