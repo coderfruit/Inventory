@@ -3,6 +3,7 @@ package com.stee.inventory.controller;
 import com.stee.inventory.dto.Result;
 import com.stee.inventory.entity.DeviceInfo;
 import com.stee.inventory.entity.DeviceLocationInfo;
+import com.stee.inventory.entity.GeoZoneLampInfo;
 import com.stee.inventory.entity.RequestObject;
 import com.stee.inventory.entity.sel.LampInfoDetail;
 import com.stee.inventory.service.ICalendarProfileService;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -150,10 +153,21 @@ public class LampInformationController {
 	 * @author Jerry
 	 */
 	@RequestMapping(value = "/geozone/get/all", method = RequestMethod.GET)
-	public ResultData<DeviceInfoEntity> getAllForGz() {
+	public ResultData<GeoZoneLampInfo> getAllForGz() {
 		ResultData<DeviceInfoEntity> all = service.getAll();
+		List<GeoZoneLampInfo> list = new ArrayList<>();
+		try {
+				all.getData().forEach(t -> {
+					String id = t.getDeviceId();
+					list.add(new GeoZoneLampInfo(id, t.getLatitude(), t.getLongitude()));
+				});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ResultData<GeoZoneLampInfo> resultData = new ResultData<>();
+		resultData.setData(list);
 
-		return all;
+		return resultData;
 	}
 
 	/**
