@@ -72,7 +72,6 @@ public class DeviceModelServiceImpl implements IDeviceModelService{
     @Override
     public ResultData<DeviceModelEntity> findByModelIdLike(LuminaireQueryBean query) {
         ResultData<DeviceModelEntity> resultData = new ResultData<>();
-        List<DeviceModelEntity> list = Lists.newArrayList();
         List<DeviceModelEntity> configs = Lists.newArrayList();
         if (null == query) {
             try {
