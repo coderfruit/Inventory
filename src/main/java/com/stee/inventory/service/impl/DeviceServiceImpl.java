@@ -468,7 +468,7 @@ public class DeviceServiceImpl implements IDeviceService{
                     dataList.add(","+",Start Date:"+","+obj.getStartDate());
                     dataList.add(","+",End Date:"+","+obj.getEndDate());
                     // 根据不同的criteria加不同的列名
-                    dataList.add(","+",Export Time:"+","+df.format(new Date()));
+                    dataList.add(","+",Export Time:"+","+obj.getExportTime());
 
                     dataList.add(",,,");
                     dataList.add("Date,"+obj.getName()+"("+getUnits(obj.getType())+")");
@@ -519,7 +519,7 @@ public class DeviceServiceImpl implements IDeviceService{
                 for (DeviceDataStatsEntity e : dsrList) {
                     totalData += e.getData();
                 }
-                obj.setExportTime(df.format(new Date()));//导出时间
+//                obj.setExportTime(df.format(new Date()));//导出时间
                 freemarkerData.put("DSRCondition", obj);
                 freemarkerData.put("DSRReport", dsrList);
                 freemarkerData.put("type", obj.getType());
