@@ -169,7 +169,6 @@ public class DeviceServiceImpl implements IDeviceService{
             DeviceModelEntity deviceModel = deviceModelDao.findByDeviceModelId(lamp.getDeviceModelId());
             lamp.setControlProtocol(deviceModel.getControlProtocol());
         });
-
         return lampList;
     }
 
