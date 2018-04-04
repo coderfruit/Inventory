@@ -165,6 +165,11 @@ public class DeviceServiceImpl implements IDeviceService{
     @Override
     public List<DeviceInfoEntity> getByGeoZoneId(Integer geoZoneId) {
         List<DeviceInfoEntity> lampList =  repository.findByGeozoneId(geoZoneId);
+        lampList.forEach((lamp)->{
+            DeviceModelEntity deviceModel = deviceModelDao.findByDeviceModelId(lamp.getDeviceModelId());
+            lamp.setControlProtocol(deviceModel.getControlProtocol());
+        });
+
         return lampList;
     }
 
